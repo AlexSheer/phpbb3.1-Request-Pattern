@@ -27,9 +27,10 @@ class v_0_0_1 extends \phpbb\db\migration\migration
 			'add_tables'		=> array(
 				$this->table_prefix . 'request_pattern'	=> array(
 					'COLUMNS'		=> array(
-						'id'			=> array('UINT', null, 'auto_increment'),
-						'question'		=> array('VCHAR:255', ''),
-						'order_question'=> array('USINT', 0),
+						'id'				=> array('UINT', null, 'auto_increment'),
+						'question'			=> array('VCHAR:255', ''),
+						'question_explain'	=> array('VCHAR:255', ''),
+						'order_question'	=> array('USINT', 0),
 					),
 					'PRIMARY_KEY'	=> 'id',
 				),
