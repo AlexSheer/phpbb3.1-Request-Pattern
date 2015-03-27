@@ -40,6 +40,7 @@ $lang = array_merge($lang, array(
 	'ACP_REQUEST_PATTERN_EXPLAIN'	=> 'Управление',
 
 	'QUESTION_NAME'				=> 'Вопрос',
+	'EXPLAIN'					=> 'Пояснение',
 	'DELETE_MARKED_SUCESS'		=> 'Выбранные вопросы были успешно удалены',
 	'DELETE_SUCESS'				=> 'Все вопросы были успешно удалены',
 	'UPDATE_SUCCESS'			=> 'Выбранные вопросы были успешно изменены',
