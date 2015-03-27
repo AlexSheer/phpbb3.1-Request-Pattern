@@ -1,0 +1,3 @@
+sheer_ptrequest_controller:
+    pattern: /ptrequest
+    defaults: { _controller: sheer.ptrequest.controller:main }
