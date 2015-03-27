@@ -1,0 +1,53 @@
+<!-- INCLUDE simple_header.html -->
+
+<script type="text/javascript">
+<!--
+	var form_name = 'postform';
+	var text_name = 'message';
+
+	var optionsNumber = {OPTIONS_NUMBER};
+	var optionsList = new Array({OPTIONS_NUMBER});
+	var optionsKeys = new Array({OPTIONS_NUMBER});
+
+<!-- BEGIN patternrow -->
+	optionsList[{patternrow.ID}] = '{patternrow.L_VALUE}';
+	optionsKeys[{patternrow.ID}] = '{patternrow.L_KEY}';
+<!-- END patternrow -->
+
+	function put_pattern()
+	{
+		var r = 0, text = '';
+		for (r = 0; r < optionsNumber; r++)
+		{
+			text += '[b]'+optionsList[r]+'[/b]: '+document.forms['pattern'].elements[optionsKeys[r]].value+'\r\n';
+		}
+		insert_text(text, false, true);
+	}
+//-->
+</script>
+
+<script type="text/javascript" src="{T_ASSETS_PATH}/javascript/editor.js"></script>
+<form id="pattern" method="post" action="" onsubmit="return checkForm(this);" name="pattern">
+<div class="panel" id="patternbox">
+	<div class="inner">
+	<h3>{L_PATTERN}</h3>
+		<fieldset>
+		<!-- BEGIN patternrow -->
+			<dl>
+				<dt><label for="{patternrow.ID}">{patternrow.L_VALUE}</label></dt>
+				<dd><input type="text" tabindex="{patternrow.ID}" name="{patternrow.L_KEY}" id="{patternrow.ID}" size="25" class="inputbox" /></dd>
+			</dl>
+		<!-- END patternrow -->
+		</fieldset>
+	</div>
+</div>
+<div class="panel bg3">
+	<div class="inner">
+		<fieldset class="submit-buttons">
+		<input type="submit" name="post" value="{L_SUBMIT}" class="button1" onclick="put_pattern();window.close();return false;" /><br />
+				<br /><a class="nav" href="#" onclick="window.close(); return false;">{L_CLOSE_WINDOW}</a>
+		</fieldset>
+	</div>
+</div>
+</form>
+<!-- INCLUDE simple_footer.html -->
