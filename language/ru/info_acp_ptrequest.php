@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_REQUEST_PATTERN'			=> 'Шаблон запроса',
 	'ACP_REQUEST_PATTERN_MANAGE'	=> 'Управление',
-	'ACP_REQUEST_PATTERN_EXPLAIN'	=> 'Здесь вы можете составить список вопросов для шаблона запроса. Вы так же можете редактировать, удалять и перемещать вопросы.',
+	'ACP_REQUEST_PATTERN_EXPLAIN'	=> 'Здесь вы можете составить список вопросов для шаблона. Вы так же можете редактировать, удалять и перемещать вопросы.',
 
 	'QUESTION_NAME'				=> 'Вопрос',
 	'EXPLAIN'					=> 'Пояснение',
