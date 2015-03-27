@@ -27,10 +27,13 @@ class main_module
 
 		$ids				= $request->variable('ids', array(0));
 		$order_questions	= $request->variable('patternrow', array(''), true);
+		$explains			= $request->variable('explain', array(''), true);
 		$deletemark			= $request->variable('delmarked', false, false, \phpbb\request\request_interface::POST);
 		$deleteall			= $request->variable('delall', false, false, \phpbb\request\request_interface::POST);
 
 		$question			= $request->variable('question', '', true);
+		$explain			= $request->variable('expl', '', true);
+
 
 		$this->tpl_name = 'acp_order_questions_body';
 		$this->page_title = $user->lang('ACP_REQUEST_PATTERN');
@@ -58,7 +61,8 @@ class main_module
 					if (!sizeof($error))
 					{
 						$sql_data = array(
-							'question'	=> $order_questions[$id],
+							'question'			=> $order_questions[$id],
+							'question_explain'	=> $explains[$id],
 						);
 
 						$sql = 'UPDATE ' . REQUEST_PATTERN_TABLE . '
@@ -136,10 +140,11 @@ class main_module
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('patternrow', array(
-				'ID'			=> $row['id'],
-				'QUESTION'		=> $row['question'],
-				'U_MOVE_UP'		=> $this->u_action . '&amp;action=move_up&amp;order_question_id=' . $row['id'] . '',
-				'U_MOVE_DOWN'	=> $this->u_action . '&amp;action=move_down&amp;order_question_id=' . $row['id'] . '',
+				'ID'				=> $row['id'],
+				'QUESTION'			=> $row['question'],
+				'QUESTION_EXPLAIN'	=> $row['question_explain'],
+				'U_MOVE_UP'			=> $this->u_action . '&amp;action=move_up&amp;order_question_id=' . $row['id'] . '',
+				'U_MOVE_DOWN'		=> $this->u_action . '&amp;action=move_down&amp;order_question_id=' . $row['id'] . '',
 				)
 			);
 		}
@@ -147,7 +152,8 @@ class main_module
 
 		if ($request->is_set_post('add'))
 		{
-			$sql = 'SELECT MAX(order_question) AS max FROM ' . REQUEST_PATTERN_TABLE;
+			$sql = 'SELECT MAX(order_question) AS max
+				FROM ' . REQUEST_PATTERN_TABLE;
 			$result = $db->sql_query($sql);
 			$max = (int) $db->sql_fetchfield('max');
 			$db->sql_freeresult($result);
@@ -162,6 +168,7 @@ class main_module
 			{
 				$sql_ary = array(
 					'question'			=> $question,
+					'question_explain'	=> $explain,
 					'order_question'	=> $max,
 				);
 
@@ -188,9 +195,11 @@ class main_module
 		}
 
 		$template->assign_vars(array(
-			'U_ACTION'		=> $this->u_action,
-			'ERROR'			=> (sizeof($error)) ? implode('<br />', $error) : '',
-			'S_ERROR'		=> (sizeof($_error)) ? implode('<br />', $_error) : '',
+			'U_ACTION'			=> $this->u_action,
+			'QUESTION'			=> $question,
+			'QUESTION_EXPLAIN'	=> $explain,
+			'ERROR'				=> (sizeof($error)) ? implode('<br />', $error) : '',
+			'S_ERROR'			=> (sizeof($_error)) ? implode('<br />', $_error) : '',
 		));
 	}
 
