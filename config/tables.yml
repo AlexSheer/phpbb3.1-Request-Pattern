@@ -1,0 +1,2 @@
+parameters:
+    tables.ptrequest: %core.table_prefix%request_pattern
