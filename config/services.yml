@@ -1,0 +1,18 @@
+imports:
+    - { resource: tables.yml }
+
+services:
+    sheer.ptrequest.controller:
+        class: sheer\ptrequest\controller\ptrequest
+        arguments:
+            - @dbal.conn
+            - @template
+            - @user
+            - %tables.ptrequest%
+    sheer.ptrequest.listener:
+        class: Sheer\ptrequest\event\listener
+        arguments:
+            - @template
+            - %core.root_path%
+        tags:
+            - { name: event.listener }
