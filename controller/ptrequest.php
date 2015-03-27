@@ -43,6 +43,7 @@ class ptrequest
 			$this->template->assign_block_vars('patternrow', array(
 				'L_KEY'		=> 'q_' . $row['order_question'] . '',
 				'L_VALUE'	=> $row['question'],
+				'L_EXPLAIN'	=> $row['question_explain'],
 				'ID'		=> $row['order_question'] - 1,
 				)
 			);
