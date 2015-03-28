@@ -12,11 +12,11 @@ namespace sheer\ptrequest\acp;
 class main_module
 {
 	var $u_action;
+	var $request_table;
 
 	function main($id, $mode)
 	{
 		global $db, $user, $template, $cache, $request, $phpbb_container;
-		global $phpbb_root_path, $phpbb_admin_path;
 
 		$this->request_table = $phpbb_container->getParameter('tables.ptrequest');
 
