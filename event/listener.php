@@ -40,6 +40,7 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'					=> 'load_language_on_setup',
 			'core.posting_modify_template_vars'	=> 'add_popup_url',
+			'core.viewtopic_modify_page_title'	=> 'add_popup_url',
 		);
 	}
 
