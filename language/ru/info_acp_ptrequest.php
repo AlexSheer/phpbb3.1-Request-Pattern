@@ -35,17 +35,22 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'ACP_REQUEST_PATTERN'			=> 'Шаблон запроса',
-	'ACP_REQUEST_PATTERN_MANAGE'	=> 'Управление',
-	'ACP_REQUEST_PATTERN_EXPLAIN'	=> 'Здесь вы можете составить список вопросов для шаблона. Вы так же можете редактировать, удалять и перемещать вопросы.',
+	'ACP_REQUEST_PATTERN'					=> 'Шаблон запроса',
+	'ACP_REQUEST_PATTERN_MANAGE'			=> 'Управление',
+	'ACP_REQUEST_PATTERN_CONFIG'			=> 'Конфигурация',
+	'ACP_REQUEST_PATTERN_EXPLAIN'			=> 'Здесь вы можете составить список вопросов для шаблона. Вы так же можете редактировать, удалять и перемещать вопросы.',
+	'ACP_REQUEST_PATTERN_CONFIG_EXPLAIN'	=> 'Здесь вы можете указать форумы, в которых &laquo;Шаблон запроса&raquo; <strong>не будет доступен</strong>.',
+
 
 	'QUESTION_NAME'				=> 'Вопрос',
 	'EXPLAIN'					=> 'Пояснение',
 	'DELETE_MARKED_SUCESS'		=> 'Выбранные вопросы были успешно удалены',
 	'DELETE_SUCESS'				=> 'Все вопросы были успешно удалены',
 	'UPDATE_SUCCESS'			=> 'Выбранные вопросы были успешно изменены',
+	'UPDATE_CONFIG_SUCCESS'		=> 'Настройки были успешно изменены',
 	'UPDATE_FAIL'				=> 'Ничего не выбрано',
 	'EMPTY_QUESTION'			=> 'Вы не ввели вопрос',
 	'ADD_SUCCESS'				=> 'Вопрос успешно добавлен',
 	'CHANGE_SELECTED'			=> 'Изменить отмеченные',
+	'EXCLUDE_FORUMS_EXPLAIN'	=> 'Для выбора нескольких форумов используйте соответствующую для вашего компьютера и браузера комбинацию мыши и клавиатуры. Исключённые форумы отображаются на синем фоне.',
 ));
