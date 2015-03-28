@@ -47,4 +47,5 @@ $lang = array_merge($lang, array(
 	'UPDATE_FAIL'				=> 'Ничего не выбрано',
 	'EMPTY_QUESTION'			=> 'Вы не ввели вопрос',
 	'ADD_SUCCESS'				=> 'Вопрос успешно добавлен',
+	'CHANGE_SELECTED'			=> 'Изменть отмеченные',
 ));
