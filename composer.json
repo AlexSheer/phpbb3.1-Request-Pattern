@@ -11,6 +11,11 @@
             "name": "Sheer",
             "homepage": "http://phpbbguru.net",
             "role": "Support Team"
+        },
+        {
+            "name": "rxu",
+            "homepage": "http://www.phpbbguru.net",
+            "role": "Developer"
         }
     ],
     "require": {
