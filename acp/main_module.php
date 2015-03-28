@@ -12,11 +12,11 @@ namespace sheer\ptrequest\acp;
 class main_module
 {
 	var $u_action;
+	var $request_table;
 
 	function main($id, $mode)
 	{
 		global $db, $user, $template, $cache, $request, $phpbb_container;
-		global $phpbb_root_path, $phpbb_admin_path;
 
 		$this->request_table = $phpbb_container->getParameter('tables.ptrequest');
 
@@ -68,7 +68,7 @@ class main_module
 						$db->sql_query($sql);
 					}
 				}
-				$cache->destroy('_pattern_request');
+				$cache->destroy('sql', $this->request_table);
 				meta_refresh(3, append_sid($this->u_action));
 				trigger_error($user->lang['UPDATE_SUCCESS'] . adm_back_link($this->u_action));
 			}
@@ -117,7 +117,7 @@ class main_module
 					$msg = $user->lang['DELETE_SUCESS'];
 					$db->sql_query($sql);
 				}
-				$cache->destroy('_pattern_request');
+				$cache->destroy('sql', $this->request_table);
 				meta_refresh(3, append_sid($this->u_action));
 				trigger_error($msg . adm_back_link($this->u_action));
 			}
@@ -135,7 +135,7 @@ class main_module
 		$sql = 'SELECT *
 			FROM ' . $this->request_table . '
 			ORDER BY order_question';
-		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql, 86400);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('patternrow', array(
@@ -172,7 +172,7 @@ class main_module
 				);
 
 				$db->sql_query('INSERT INTO ' . $this->request_table . ' ' . $db->sql_build_array('INSERT', $sql_ary));
-				$cache->destroy('_pattern_request');
+				$cache->destroy('sql', $this->request_table);
 				meta_refresh(3, append_sid($this->u_action));
 				trigger_error($user->lang['ADD_SUCCESS'] . adm_back_link($this->u_action));
 			}
@@ -183,7 +183,7 @@ class main_module
 			case 'move_up':
 			case 'move_down':
 			$move_name = $this->move($order_question_id, $action);
-			$cache->destroy('_pattern_request');
+			$cache->destroy('sql', $this->request_table);
 			if ($request->is_ajax())
 			{
 				$json_response = new \phpbb\json_response;
