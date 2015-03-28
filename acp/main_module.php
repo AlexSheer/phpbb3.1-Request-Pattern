@@ -15,12 +15,10 @@ class main_module
 
 	function main($id, $mode)
 	{
-		global $db, $user, $template, $cache, $request, $table_prefix;
+		global $db, $user, $template, $cache, $request, $phpbb_container;
 		global $phpbb_root_path, $phpbb_admin_path;
 
-		$phpbb_admin_path = (defined('PHPBB_ADMIN_PATH')) ? PHPBB_ADMIN_PATH : './';
-
-		define ('REQUEST_PATTERN_TABLE', $table_prefix.'request_pattern');
+		$this->request_table = $phpbb_container->getParameter('tables.ptrequest');
 
 		$action				= $request->variable('action', '');
 		$order_question_id	= $request->variable('order_question_id', 0);
@@ -33,7 +31,6 @@ class main_module
 
 		$question			= $request->variable('question', '', true);
 		$explain			= $request->variable('expl', '', true);
-
 
 		$this->tpl_name = 'acp_order_questions_body';
 		$this->page_title = $user->lang('ACP_REQUEST_PATTERN');
@@ -65,19 +62,20 @@ class main_module
 							'question_explain'	=> $explains[$id],
 						);
 
-						$sql = 'UPDATE ' . REQUEST_PATTERN_TABLE . '
+						$sql = 'UPDATE ' . $this->request_table . '
 							SET ' . $db->sql_build_array('UPDATE', $sql_data) . '
 							WHERE id = ' . $id;
 						$db->sql_query($sql);
 					}
 				}
+				$cache->destroy('_pattern_request');
 				meta_refresh(3, append_sid($this->u_action));
-				trigger_error($user->lang['UPDATE_SUCCESS']);
+				trigger_error($user->lang['UPDATE_SUCCESS'] . adm_back_link($this->u_action));
 			}
 			else
 			{
 				meta_refresh(3, append_sid($this->u_action));
-				trigger_error($user->lang['UPDATE_FAIL'], E_USER_WARNING);
+				trigger_error($user->lang['UPDATE_FAIL'] . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 		}
 
@@ -91,23 +89,23 @@ class main_module
 					foreach($ids as $id)
 					{
 						$sql = 'SELECT order_question
-							FROM ' . REQUEST_PATTERN_TABLE. '
+							FROM ' . $this->request_table. '
 							WHERE id = '. $id;
 						$result = $db->sql_query($sql);
 						$order_question = (int) $db->sql_fetchfield('order_question');
 						$db->sql_freeresult($result);
 
-						$sql = 'DELETE FROM ' . REQUEST_PATTERN_TABLE. ' WHERE id = '. $id;
+						$sql = 'DELETE FROM ' . $this->request_table. ' WHERE id = '. $id;
 						$db->sql_query($sql);
 
 						$sql = 'SELECT id, order_question
-							FROM ' . REQUEST_PATTERN_TABLE. '
+							FROM ' . $this->request_table . '
 							WHERE order_question > '. $order_question;
 						$result = $db->sql_query($sql);
 
 						while ($row = $db->sql_fetchrow($result))
 						{
-							$sql = 'UPDATE ' . REQUEST_PATTERN_TABLE. ' SET order_question = order_question - 1 WHERE id = '. $row['id'] . '';
+							$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. $row['id'] . '';
 							$db->sql_query($sql);
 						}
 						$db->sql_freeresult($result);
@@ -115,12 +113,13 @@ class main_module
 				}
 				if($deleteall)
 				{
-					$sql = 'TRUNCATE ' . REQUEST_PATTERN_TABLE;
+					$sql = 'TRUNCATE ' . $this->request_table;
 					$msg = $user->lang['DELETE_SUCESS'];
 					$db->sql_query($sql);
 				}
+				$cache->destroy('_pattern_request');
 				meta_refresh(3, append_sid($this->u_action));
-				trigger_error($msg);
+				trigger_error($msg . adm_back_link($this->u_action));
 			}
 			else
 			{
@@ -134,7 +133,7 @@ class main_module
 		}
 
 		$sql = 'SELECT *
-			FROM ' . REQUEST_PATTERN_TABLE . '
+			FROM ' . $this->request_table . '
 			ORDER BY order_question';
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
@@ -153,7 +152,7 @@ class main_module
 		if ($request->is_set_post('add'))
 		{
 			$sql = 'SELECT MAX(order_question) AS max
-				FROM ' . REQUEST_PATTERN_TABLE;
+				FROM ' . $this->request_table;
 			$result = $db->sql_query($sql);
 			$max = (int) $db->sql_fetchfield('max');
 			$db->sql_freeresult($result);
@@ -172,9 +171,10 @@ class main_module
 					'order_question'	=> $max,
 				);
 
-				$db->sql_query('INSERT INTO ' . REQUEST_PATTERN_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary));
+				$db->sql_query('INSERT INTO ' . $this->request_table . ' ' . $db->sql_build_array('INSERT', $sql_ary));
+				$cache->destroy('_pattern_request');
 				meta_refresh(3, append_sid($this->u_action));
-				trigger_error($user->lang['ADD_SUCCESS']);
+				trigger_error($user->lang['ADD_SUCCESS'] . adm_back_link($this->u_action));
 			}
 		}
 
@@ -183,7 +183,7 @@ class main_module
 			case 'move_up':
 			case 'move_down':
 			$move_name = $this->move($order_question_id, $action);
-			$cache->destroy('sql', REQUEST_PATTERN_TABLE);
+			$cache->destroy('_pattern_request');
 			if ($request->is_ajax())
 			{
 				$json_response = new \phpbb\json_response;
@@ -205,16 +205,16 @@ class main_module
 
 	function move($id, $action = 'move_up')
 	{
-		global $db;
+		global $db, $phpbb_container;
 		$sql = 'SELECT order_question
-			FROM ' . REQUEST_PATTERN_TABLE . '
+			FROM ' . $this->request_table . '
 			WHERE id = ' . $id;
 		$result = $db->sql_query_limit($sql, 1);
 		$order = $db->sql_fetchfield('order_question');
 		$db->sql_freeresult($result);
 
 		$sql = 'SELECT id, order_question
-			FROM ' . REQUEST_PATTERN_TABLE . "
+			FROM ' . $this->request_table . "
 			WHERE " . (($action == 'move_up') ? "order_question < {$order} ORDER BY order_question DESC" : "order_question > {$order} ORDER BY order_question ASC");
 		$result = $db->sql_query_limit($sql, 1);
 		$target = array();
@@ -231,16 +231,16 @@ class main_module
 
 		if ($action == 'move_up')
 		{
-			$sql = 'UPDATE ' . REQUEST_PATTERN_TABLE. ' SET order_question = order_question + 1 WHERE id = '. $target['id'] . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = '. $target['id'] . '';
 			$db->sql_query($sql);
-			$sql = 'UPDATE ' . REQUEST_PATTERN_TABLE. ' SET order_question = order_question - 1 WHERE id = '. $id . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. $id . '';
 			$db->sql_query($sql);
 		}
 		else
 		{
-			$sql = 'UPDATE ' . REQUEST_PATTERN_TABLE. ' SET order_question = order_question - 1 WHERE id = '. $target['id'] . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. $target['id'] . '';
 			$db->sql_query($sql);
-			$sql = 'UPDATE ' . REQUEST_PATTERN_TABLE. ' SET order_question = order_question + 1 WHERE id = '. $id . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = '. $id . '';
 			$db->sql_query($sql);
 		}
 		return $order;
