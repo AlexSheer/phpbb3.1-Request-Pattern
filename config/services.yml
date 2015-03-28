@@ -8,6 +8,7 @@ services:
             - @dbal.conn
             - @template
             - @user
+            - @cache
             - %tables.ptrequest%
     sheer.ptrequest.listener:
         class: Sheer\ptrequest\event\listener
