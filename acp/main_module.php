@@ -17,23 +17,72 @@ class main_module
 	function main($id, $mode)
 	{
 		global $db, $user, $template, $cache, $request, $phpbb_container;
+		$mode = $request->variable('mode', '');
+		switch ($mode)
+		{
+			case 'config':
+				$this->page_title = $user->lang('ACP_REQUEST_PATTERN_CONFIG');
+				$this->tpl_name = 'acp_config_body';
+				$this->config();
+			break;
+			case 'manage':
+			default:
+				$this->page_title = $user->lang('ACP_REQUEST_PATTERN_MANAGE');
+				$this->tpl_name = 'acp_order_questions_body';
+				$this->manage();
+			break;
+		}
+	}
+
+	function config()
+	{
+		global $db, $user, $template, $request, $config;
+
+		$forums = explode(',', $config['request_ex_forums']);
+		$exclude_forums	= $request->variable('forum_id', $forums);
+		$forum_list = make_forum_select(false, false, true, true, true, false, true);
+		$s_forum_options = '';
+		foreach($forum_list as $key => $value)
+		{
+			$selected = (in_array($value['forum_id'], $forums)) ? true : false;
+			$s_forum_options .='<option value="' . $value['forum_id'] . '"' . (($selected) ? ' selected="selected"' : '') . (($value['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $value['padding'] . $value['forum_name'] . '</option value>';
+		}
+
+		$template->assign_vars(array(
+			'S_SELECT_FORUM'		=> true,
+			'S_FORUM_OPTIONS'		=> $s_forum_options,
+			)
+		);
+
+		add_form_key('sheer/order_questions');
+		if ($request->is_set_post('submit'))
+		{
+			if (!check_form_key('sheer/order_questions'))
+			{
+				trigger_error('FORM_INVALID');
+			}
+			set_config('request_ex_forums', implode(',', $exclude_forums));
+			meta_refresh(3, append_sid($this->u_action));
+			trigger_error($user->lang['UPDATE_CONFIG_SUCCESS'] . adm_back_link($this->u_action));
+		}
+	}
+
+	function manage()
+	{
+		global $db, $user, $template, $cache, $request, $phpbb_container;
 
 		$this->request_table = $phpbb_container->getParameter('tables.ptrequest');
 
-		$action				= $request->variable('action', '');
 		$order_question_id	= $request->variable('order_question_id', 0);
-
 		$ids				= $request->variable('ids', array(0));
 		$order_questions	= $request->variable('patternrow', array(''), true);
 		$explains			= $request->variable('explain', array(''), true);
 		$deletemark			= $request->variable('delmarked', false, false, \phpbb\request\request_interface::POST);
 		$deleteall			= $request->variable('delall', false, false, \phpbb\request\request_interface::POST);
-
 		$question			= $request->variable('question', '', true);
 		$explain			= $request->variable('expl', '', true);
+		$action				= $request->variable('action', '');
 
-		$this->tpl_name = 'acp_order_questions_body';
-		$this->page_title = $user->lang('ACP_REQUEST_PATTERN');
 		$error = $_error = array();
 
 		add_form_key('sheer/order_questions');
