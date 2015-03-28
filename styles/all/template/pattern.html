@@ -3,6 +3,10 @@
 <script type="text/javascript">
 <!--
 	var form_name = 'postform';
+    if (window.opener.document.getElementById("qr_postform"))
+	{
+        form_name = 'qr_postform';
+    }
 	var text_name = 'message';
 
 	var optionsNumber = {OPTIONS_NUMBER};
