@@ -13,7 +13,6 @@
 		<table class="table1 zebra-table">
 		<thead>
 			<tr>
-				<th>ID</th>
 				<th>{L_QUESTION_NAME}</th>
 				<th>&nbsp;</th>
 				<th>{L_MARK}</th>
@@ -22,7 +21,6 @@
 		<tbody>
 		<!-- BEGIN patternrow -->
 			<tr>
-				<td>{patternrow.ID}</td>
 				<td><input name="patternrow[{patternrow.ID}]" type="text" size="144" value="{patternrow.QUESTION}">
 				<br />{L_EXPLAIN}: <input style="margin-top: 5px; width: 660px;" name="explain[{patternrow.ID}]" type="text" size="130" value="{patternrow.QUESTION_EXPLAIN}"></td>
 				<td class="actions">
@@ -39,16 +37,12 @@
 	</fieldset>
 	<fieldset class="quick">
 		<p class="small"><a href="#" onclick="marklist('list', 'ids', true); return false;">{L_MARK_ALL}</a> :: <a href="#" onclick="marklist('list', 'ids', false); return false;">{L_UNMARK_ALL}</a></p>
+		<input class="button1" style="float:left" type="submit" id="submit" name="submit" value="{L_CHANGE_SELECTED}" />
 		<input class="button2" name="delall" value="{L_DELETE_ALL}" type="submit">&nbsp;
 		<input class="button2" name="delmarked" value="{L_DELETE_MARKED}" type="submit">
 	</fieldset>
-	<fieldset>
-		<legend>{L_EDIT}</legend>
-		<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
-		</p>
-	</fieldset>
+	<hr>
+
 	<!-- ENDIF -->
 	<fieldset>
 		<legend>{L_ADD}</legend>
