@@ -30,6 +30,7 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'					=> 'load_language_on_setup',
 			'core.posting_modify_template_vars'	=> 'add_popup_url',
+			'viewtopic_modify_page_title'		=> 'add_popup_url',
 		);
 	}
 
@@ -49,9 +50,9 @@ class listener implements EventSubscriberInterface
 
 	public function add_popup_url($event)
 	{
-		$page_data = $event['page_data'];
-		$page_data['POPUP_URL'] = $this->controller_helper->route('sheer_ptrequest_controller');
-		$event['page_data'] = $page_data;
+		$this->template->assign_vars(array(
+			'POPUP_URL' => $this->controller_helper->route('sheer_ptrequest_controller'),
+		));
 	}
 
 	public function load_language_on_setup($event)
