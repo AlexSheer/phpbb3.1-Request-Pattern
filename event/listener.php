@@ -17,6 +17,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener implements EventSubscriberInterface
 {
 	protected $controller_helper;
+
 /**
 * Assign functions defined in this class to event listeners in the core
 *
@@ -27,7 +28,7 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.user_setup'	=> 'load_language_on_setup',
+			'core.user_setup'					=> 'load_language_on_setup',
 			'core.posting_modify_template_vars'	=> 'add_popup_url',
 		);
 	}
@@ -35,7 +36,11 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*/
-	public function __construct(\phpbb\template\template $template, \phpbb\controller\helper $controller_helper, $phpbb_root_path)
+	public function __construct(
+		\phpbb\template\template $template,
+		\phpbb\controller\helper $controller_helper,
+		$phpbb_root_path
+	)
 	{
 		$this->template = $template;
 		$this->controller_helper = $controller_helper;
