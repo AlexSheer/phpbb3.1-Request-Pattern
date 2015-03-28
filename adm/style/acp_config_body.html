@@ -1,0 +1,22 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_ACP_REQUEST_PATTERN}</h1>
+<p>{L_ACP_REQUEST_PATTERN_CONFIG_EXPLAIN}</p>
+
+<form method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{L_LOOK_UP_FORUM}</legend>
+	<dl>
+		<dt><label for="forum">{L_LOOK_UP_FORUM}{L_COLON}</label><br /><span>{L_EXCLUDE_FORUMS_EXPLAIN}</span></dt>
+		<dd><select id="forum" name="forum_id[]" multiple="multiple" size="10">{S_FORUM_OPTIONS}</select></dd>
+	</dl>
+	</fieldset>
+	<p class="submit-buttons">
+		{S_HIDDEN_FIELDS}
+		{S_FORM_TOKEN}
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" />
+	</p>
+</form>
+<!-- INCLUDE overall_footer.html -->
