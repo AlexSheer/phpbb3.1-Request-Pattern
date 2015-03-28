@@ -23,6 +23,11 @@ class main_info
 					'auth' => 'ext_sheer/ptrequest && acl_a_board',
 					'cat' => array('ACP_REQUEST_PATTERN')
 				),
+				'config'	=> array(
+					'title' => 'ACP_REQUEST_PATTERN_CONFIG',
+					'auth' => 'ext_sheer/ptrequest && acl_a_board',
+					'cat' => array('ACP_REQUEST_PATTERN')
+				),
 			),
 		);
 	}
