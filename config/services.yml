@@ -11,7 +11,7 @@ services:
             - @cache
             - %tables.ptrequest%
     sheer.ptrequest.listener:
-        class: Sheer\ptrequest\event\listener
+        class: sheer\ptrequest\event\listener
         arguments:
             - @template
             - @controller.helper
