@@ -22,7 +22,7 @@
 		<!-- BEGIN patternrow -->
 			<tr>
 				<td><input name="patternrow[{patternrow.ID}]" type="text" size="144" value="{patternrow.QUESTION}">
-				<br />{L_EXPLAIN}: <input style="margin-top: 5px; width: 660px;" name="explain[{patternrow.ID}]" type="text" size="130" value="{patternrow.QUESTION_EXPLAIN}"></td>
+				<br />{L_EXPLAIN}{L_COLON} <input style="margin-top: 5px; width: 660px;" name="explain[{patternrow.ID}]" type="text" size="130" value="{patternrow.QUESTION_EXPLAIN}"></td>
 				<td class="actions">
 					<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
 					<span class="up"><a href="{patternrow.U_MOVE_UP}" data-ajax="row_up">{ICON_MOVE_UP}</a></span>
@@ -50,7 +50,7 @@
 			<div style="background:#BC2A4D; padding:5px; font-weight:bold; color:#FFF; margin:10px 0px"><p style="margin:0px">{S_ERROR}</p></div>
 			<!-- ENDIF -->
 		<dl>
-			<dt><label for="question">{L_QUESTION_NAME}:</label></dt>
+			<dt><label for="question">{L_QUESTION_NAME}{L_COLON}</label></dt>
 			<dd><input id="question" size="140" maxlength="255" name="question" value="{QUESTION}" type="text"></dd>
 		</dl>
 		<dl>
