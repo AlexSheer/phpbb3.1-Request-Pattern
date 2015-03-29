@@ -68,7 +68,6 @@ class listener implements EventSubscriberInterface
 
 	public function add_popup_url($event)
 	{
-		$page_data = $event['page_data'];
 		$ex_fid_array = explode(',', $this->config['request_ex_forums']);
 		if (!in_array($event['forum_id'], $ex_fid_array))
 		{
@@ -85,8 +84,9 @@ class listener implements EventSubscriberInterface
 
 			if(isset($row) && !empty($row) || !empty($data))
 			{
-				$page_data['POPUP_URL'] = $this->controller_helper->route('sheer_ptrequest_controller');
-				$event['page_data'] = $page_data;
+				$this->template->assign_vars(array(
+					'POPUP_URL' => $this->controller_helper->route('sheer_ptrequest_controller'),
+				));
 			}
 		}
 	}
