@@ -21,6 +21,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+   "require-dev": {
+      "phpbb/epv": "dev-master"
+   },
     "extra": {
         "display-name": "Request Pattern",
         "soft-require": {
