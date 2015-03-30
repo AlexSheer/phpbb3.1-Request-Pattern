@@ -61,7 +61,7 @@ class main_module
 			{
 				trigger_error('FORM_INVALID');
 			}
-			set_config('request_ex_forums', implode(',', $exclude_forums));
+			$config->set('request_ex_forums', implode(',', $exclude_forums));
 			meta_refresh(3, append_sid($this->u_action));
 			trigger_error($user->lang['UPDATE_CONFIG_SUCCESS'] . adm_back_link($this->u_action));
 		}
