@@ -40,6 +40,8 @@ class main_module
 
 		$forums = explode(',', $config['request_ex_forums']);
 		$exclude_forums	= $request->variable('forum_id', $forums);
+		$quest_color	= $request->variable('quest_color', $config['request_question_color']);
+		$answer_color	= $request->variable('answer_color', $config['request_answer_color']);
 		$forum_list = make_forum_select(false, false, true, true, true, false, true);
 		$s_forum_options = '';
 		foreach($forum_list as $key => $value)
@@ -51,9 +53,10 @@ class main_module
 		$template->assign_vars(array(
 			'S_SELECT_FORUM'		=> true,
 			'S_FORUM_OPTIONS'		=> $s_forum_options,
+			'QUEST_COLOR'			=> $quest_color,
+			'ANSWER_COLOR'			=> $answer_color,
 			)
 		);
-
 		add_form_key('sheer/order_questions');
 		if ($request->is_set_post('submit'))
 		{
@@ -62,6 +65,9 @@ class main_module
 				trigger_error('FORM_INVALID');
 			}
 			$config->set('request_ex_forums', implode(',', $exclude_forums));
+			$config->set('request_question_color', $quest_color);
+			$config->set('request_answer_color', $answer_color);
+
 			meta_refresh(3, append_sid($this->u_action));
 			trigger_error($user->lang['UPDATE_CONFIG_SUCCESS'] . adm_back_link($this->u_action));
 		}

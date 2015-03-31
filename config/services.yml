@@ -5,6 +5,7 @@ services:
     sheer.ptrequest.controller:
         class: sheer\ptrequest\controller\ptrequest
         arguments:
+            - @config
             - @dbal.conn
             - @template
             - @user

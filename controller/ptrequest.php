@@ -18,6 +18,7 @@ class ptrequest
 	protected $user;
 
 	public function __construct(
+		\phpbb\config\config $config,
 		\phpbb\db\driver\driver_interface $db,
 		\phpbb\template\template $template,
 		\phpbb\user $user,
@@ -25,6 +26,7 @@ class ptrequest
 		$request_table
 	)
 	{
+		$this->config = $config;
 		$this->db = $db;
 		$this->template = $template;
 		$this->user = $user;
@@ -66,6 +68,8 @@ class ptrequest
 
 		$this->template->assign_vars(array(
 			'OPTIONS_NUMBER'		=> sizeof($data),
+			'QUEST_COLOR'			=> $this->config['request_question_color'],
+			'ANSWER_COLOR'			=> $this->config['request_answer_color'],
 			)
 		);
 
