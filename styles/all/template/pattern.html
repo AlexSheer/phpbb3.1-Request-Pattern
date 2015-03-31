@@ -23,7 +23,7 @@
 		var r = 0, text = '';
 		for (r = 0; r < optionsNumber; r++)
 		{
-			text += '[b]'+optionsList[r]+'[/b]: '+document.forms['pattern'].elements[optionsKeys[r]].value+'\r\n';
+			text += '[b]'+'[color=#{QUEST_COLOR}]'+optionsList[r]+'[/color]'+'[/b]: '+'[color=#{ANSWER_COLOR}]'+document.forms['pattern'].elements[optionsKeys[r]].value+'[/color]'+'\r\n';
 		}
 		insert_text(text, false, true);
 	}

@@ -52,4 +52,6 @@ $lang = array_merge($lang, array(
 	'ADD_SUCCESS'				=> 'Question was added successfully',
 	'CHANGE_SELECTED'			=> 'Change selected questions',
 	'EXCLUDE_FORUMS_EXPLAIN'	=> 'To select multiple forums, use appropriate for your computer and browser combination of mouse and keyboard. Excluded forums are displayed on a blue background.',
+	'ANSWER_COLOR'				=> 'Font color of answers',
+	'QUEST_COLOR'				=> 'Font color of questions',
 ));

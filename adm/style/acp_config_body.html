@@ -1,5 +1,5 @@
 <!-- INCLUDE overall_header.html -->
-
+<script type="text/javascript" src="{ROOT_PATH}ext/sheer/ptrequest/adm/style/jscolor.js"></script>
 <a name="maincontent"></a>
 
 <h1>{L_ACP_REQUEST_PATTERN}</h1>
@@ -11,6 +11,14 @@
 	<dl>
 		<dt><label for="forum">{L_LOOK_UP_FORUM}{L_COLON}</label><br /><span>{L_EXCLUDE_FORUMS_EXPLAIN}</span></dt>
 		<dd><select id="forum" name="forum_id[]" multiple="multiple" size="10">{S_FORUM_OPTIONS}</select></dd>
+	</dl>
+	<dl>
+		<dt><label for="quest_color">{L_QUEST_COLOR}{L_COLON}</label><br /></dt>
+		<dd><input id ="quest_color" name ="quest_color" class="color" value="{QUEST_COLOR}"></dd>
+	</dl>
+	<dl>
+		<dt><label for="answer_color">{L_ANSWER_COLOR}{L_COLON}</label><br /></dt>
+		<dd><input id ="answer_color" name ="answer_color" class="color" value="{ANSWER_COLOR}"></dd>
 	</dl>
 	</fieldset>
 	<p class="submit-buttons">
