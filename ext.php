@@ -8,7 +8,7 @@
 *
 */
 
-namespace cece74\nivoslider;
+namespace sheer\ptrequest;
 
 /**
 * This ext class is optional and can be omitted if left empty.
