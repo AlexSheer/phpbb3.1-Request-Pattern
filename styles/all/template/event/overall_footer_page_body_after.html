@@ -1,0 +1,57 @@
+<!-- IF SCRIPT_NAME == 'posting' or SCRIPT_NAME == 'viewtopic' -->
+<script type="text/javascript">
+// <![CDATA[
+	<!-- IF SCRIPT_NAME == 'viewtopic' -->var form_name = 'qr_postform';<!-- ELSE -->var form_name = 'postform';<!-- ENDIF -->
+	var text_name = 'message';
+
+	var optionsNumber = {OPTIONS_NUMBER};
+	var optionsList = new Array({OPTIONS_NUMBER});
+	var optionsKeys = new Array({OPTIONS_NUMBER});
+
+<!-- BEGIN patternrow -->
+	optionsList[{patternrow.ID}] = '{patternrow.L_VALUE}';
+	optionsKeys[{patternrow.ID}] = '{patternrow.L_KEY}';
+<!-- END patternrow -->
+
+	function toogle_pattern_box()
+	{
+		phpbb.toggleDisplay('pattern_box');
+		e = document.getElementById('pattern_box');
+	}
+	function pattern_box() {
+		var r = 0, text = '';
+		for (r = 0; r < optionsNumber; r++)
+		{
+			text += '[b]'+'[color=#{QUEST_COLOR}]'+optionsList[r]+'[/color]'+'[/b]: '+'[color=#{ANSWER_COLOR}]'+document.forms['pattern'].elements[optionsKeys[r]].value+'[/color]'+'\r\n';
+		}
+		insert_text(text);
+	}
+// ]]>
+</script>
+
+<div id="pattern_box" class="phpbb_alert" style="display:none">
+	<form name=pattern>
+		<div class="panel" id="patternbox">
+			<div class="inner">
+				<h3>{L_PATTERN}</h3>
+				<fieldset>
+				<!-- BEGIN patternrow -->
+					<dl>
+						<dt><label for="{patternrow.ID}">{patternrow.L_VALUE}</label><!-- IF patternrow.L_EXPLAIN --><br /><span>{patternrow.L_EXPLAIN}</span><!-- ENDIF --></dt>
+						<dd><input type="text" tabindex="{patternrow.ID}" name="{patternrow.L_KEY}" id="{patternrow.ID}" size="25" class="inputbox" /></dd>
+					</dl>
+				<!-- END patternrow -->
+				</fieldset>
+			</div>
+		</div>
+		<div class="panel bg3">
+			<div class="inner">
+				<fieldset class="submit-buttons">
+				<input type="button" name="post" value="{L_SUBMIT}" class="button1" onclick="pattern_box();toogle_pattern_box();" /><br />
+						<br /><a class="nav" href="#" onclick="toogle_pattern_box()">{L_CLOSE_WINDOW}</a>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- ENDIF -->
