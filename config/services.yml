@@ -1,16 +1,6 @@
 imports:
     - { resource: tables.yml }
-
 services:
-    sheer.ptrequest.controller:
-        class: sheer\ptrequest\controller\ptrequest
-        arguments:
-            - @config
-            - @dbal.conn
-            - @template
-            - @user
-            - @cache
-            - %tables.ptrequest%
     sheer.ptrequest.listener:
         class: sheer\ptrequest\event\listener
         arguments:
