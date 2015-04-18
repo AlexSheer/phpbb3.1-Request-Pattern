@@ -75,20 +75,40 @@ class listener implements EventSubscriberInterface
 			{
 				$data = array();
 
-				$sql = 'SELECT id
-					FROM ' . $this->request_table;
+				$sql = 'SELECT *
+					FROM ' . $this->request_table . '
+					ORDER BY order_question';
 				$result = $this->db->sql_query($sql);
-				$row = $this->db->sql_fetchrow($result);
+				while($row = $this->db->sql_fetchrow($result))
+				{
+					$id = $row['order_question'] - 1;
+					$data[$id]['key'] = $row['order_question'];
+					$data[$id]['value'] = $row['question'];
+					$data[$id]['explain'] = $row['question_explain'];
+				}
 				$this->db->sql_freeresult($result);
+				$this->cache->put('_pattern_request', $data);
 			}
 
-			if(isset($row) && !empty($row) || !empty($data))
+			foreach($data as $key => $value)
 			{
-				$this->template->assign_vars(array(
-					'POPUP_URL' => $this->controller_helper->route('sheer_ptrequest_controller'),
-				));
+				$this->template->assign_block_vars('patternrow', array(
+					'L_KEY'		=> 'q_' . $data[$key]['key'] . '',
+					'L_VALUE'	=> $data[$key]['value'],
+					'L_EXPLAIN'	=> $data[$key]['explain'],
+					'ID'		=> $key,
+					)
+				);
 			}
+
+			$this->template->assign_vars(array(
+				'OPTIONS_NUMBER'		=> sizeof($data),
+				'QUEST_COLOR'			=> $this->config['request_question_color'],
+				'ANSWER_COLOR'			=> $this->config['request_answer_color'],
+				)
+			);
 		}
+
 	}
 
 	public function load_language_on_setup($event)
