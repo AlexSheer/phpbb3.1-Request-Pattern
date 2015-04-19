@@ -1,7 +1,7 @@
-<!-- IF S_VIEWTOPIC or S_IN_POSTING -->
+<!-- IF (S_VIEWTOPIC and S_QUICK_REPLY) or S_IN_POSTING -->
 <script type="text/javascript">
 // <![CDATA[
-	<!-- IF S_VIEWTOPIC -->var form_name = 'qr_postform';<!-- ELSE -->var form_name = 'postform';<!-- ENDIF -->
+	<!-- IF S_VIEWTOPIC and S_QUICK_REPLY -->var form_name = 'qr_postform';<!-- ELSE -->var form_name = 'postform';<!-- ENDIF -->
 	var text_name = 'message';
 
 	var optionsNumber = {OPTIONS_NUMBER};
