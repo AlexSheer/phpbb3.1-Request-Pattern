@@ -47,12 +47,12 @@ input.close:hover
 	text-decoration: underline;
 }
 </style>
-<div id="pattern_box" class="phpbb_alert" style="top: 5px; width:800px; display:none">
+<div id="pattern_box" class="phpbb_alert" style="top: 5px; width:800px; max-height: 600px; display:none">
 	<form name=pattern>
 		<div class="panel" id="patternbox">
 			<div class="inner">
 				<h3>{L_PATTERN}</h3>
-				<fieldset>
+				<fieldset style="max-height: 400px; overflow-y: scroll;">
 				<!-- BEGIN patternrow -->
 					<dl>
 						<dt><label style="padding-bottom:0px;" for="{patternrow.ID}">{patternrow.L_VALUE}</label><!-- IF patternrow.L_EXPLAIN --><span>{patternrow.L_EXPLAIN}</span><!-- ENDIF --></dt>
