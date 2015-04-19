@@ -29,7 +29,7 @@
 // ]]>
 </script>
 
-<div id="pattern_box" class="phpbb_alert" style="display:none">
+<div id="pattern_box" class="phpbb_alert" style="top: 5px; width:800px; display:none">
 	<form name=pattern>
 		<div class="panel" id="patternbox">
 			<div class="inner">
@@ -37,7 +37,7 @@
 				<fieldset>
 				<!-- BEGIN patternrow -->
 					<dl>
-						<dt><label for="{patternrow.ID}">{patternrow.L_VALUE}</label><!-- IF patternrow.L_EXPLAIN --><br /><span>{patternrow.L_EXPLAIN}</span><!-- ENDIF --></dt>
+						<dt><label style="padding-bottom:0px;" for="{patternrow.ID}">{patternrow.L_VALUE}</label><!-- IF patternrow.L_EXPLAIN --><span>{patternrow.L_EXPLAIN}</span><!-- ENDIF --></dt>
 						<dd><input type="text" tabindex="{patternrow.ID}" name="{patternrow.L_KEY}" id="{patternrow.ID}" size="25" class="inputbox" /></dd>
 					</dl>
 				<!-- END patternrow -->
