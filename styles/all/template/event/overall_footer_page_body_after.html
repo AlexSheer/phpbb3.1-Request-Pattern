@@ -26,9 +26,27 @@
 		}
 		insert_text(text);
 	}
+
+	function clear_box() {
+		insert_text('');
+	}
 // ]]>
 </script>
-
+<style>
+input.close
+{
+	color: #105289;
+	border: none;
+	background: none;
+	cursor: pointer;
+	text-align: center;
+}
+input.close:hover
+{
+	color: #D31141;
+	text-decoration: underline;
+}
+</style>
 <div id="pattern_box" class="phpbb_alert" style="top: 5px; width:800px; display:none">
 	<form name=pattern>
 		<div class="panel" id="patternbox">
@@ -48,7 +66,7 @@
 			<div class="inner">
 				<fieldset class="submit-buttons">
 					<input type="button" name="post" value="{L_SUBMIT}" class="button1" onclick="pattern_box();toogle_pattern_box();" /><br />
-					<br /><a class="nav" href="#" onclick="toogle_pattern_box()">{L_CLOSE_WINDOW}</a>
+					<br /><input class="close" value="{L_CLOSE_WINDOW}" onclick="clear_box(); toogle_pattern_box()">
 				</fieldset>
 			</div>
 		</div>
