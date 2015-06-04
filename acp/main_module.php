@@ -38,16 +38,17 @@ class main_module
 	{
 		global $db, $user, $template, $request, $config;
 
-		$forums = explode(',', $config['request_ex_forums']);
+		$forums			= explode(',', $config['request_ex_forums']);
 		$exclude_forums	= $request->variable('forum_id', $forums);
 		$quest_color	= $request->variable('quest_color', $config['request_question_color']);
 		$answer_color	= $request->variable('answer_color', $config['request_answer_color']);
-		$forum_list = make_forum_select(false, false, true, true, true, false, true);
+		$forum_list		= make_forum_select(false, false, true, true, true, false, true);
 		$s_forum_options = '';
+
 		foreach($forum_list as $key => $value)
 		{
 			$selected = (in_array($value['forum_id'], $forums)) ? true : false;
-			$s_forum_options .='<option value="' . $value['forum_id'] . '"' . (($selected) ? ' selected="selected"' : '') . (($value['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $value['padding'] . $value['forum_name'] . '</option value>';
+			$s_forum_options .='<option value="' . $value['forum_id'] . '"' . (($selected) ? ' selected="selected"' : '') . (($value['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $value['padding'] . $value['forum_name'] . '</option>';
 		}
 
 		$template->assign_vars(array(
@@ -58,6 +59,7 @@ class main_module
 			)
 		);
 		add_form_key('sheer/order_questions');
+
 		if ($request->is_set_post('submit'))
 		{
 			if (!check_form_key('sheer/order_questions'))
@@ -119,7 +121,7 @@ class main_module
 
 						$sql = 'UPDATE ' . $this->request_table . '
 							SET ' . $db->sql_build_array('UPDATE', $sql_data) . '
-							WHERE id = ' . $id;
+							WHERE id = ' . (int)$id;
 						$db->sql_query($sql);
 					}
 				}
@@ -145,12 +147,12 @@ class main_module
 					{
 						$sql = 'SELECT order_question
 							FROM ' . $this->request_table. '
-							WHERE id = '. $id;
+							WHERE id = '. (int)$id;
 						$result = $db->sql_query($sql);
 						$order_question = (int) $db->sql_fetchfield('order_question');
 						$db->sql_freeresult($result);
 
-						$sql = 'DELETE FROM ' . $this->request_table. ' WHERE id = '. $id;
+						$sql = 'DELETE FROM ' . $this->request_table. ' WHERE id = '. (int)$id;
 						$db->sql_query($sql);
 
 						$sql = 'SELECT id, order_question
@@ -160,7 +162,7 @@ class main_module
 
 						while ($row = $db->sql_fetchrow($result))
 						{
-							$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. $row['id'] . '';
+							$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. (int)$row['id'] . '';
 							$db->sql_query($sql);
 						}
 						$db->sql_freeresult($result);
@@ -236,6 +238,7 @@ class main_module
 		switch ($action)
 		{
 			case 'move_up':
+			// No break here
 			case 'move_down':
 			$move_name = $this->move($order_question_id, $action);
 			$cache->destroy('_pattern_request');
@@ -263,7 +266,7 @@ class main_module
 		global $db, $phpbb_container;
 		$sql = 'SELECT order_question
 			FROM ' . $this->request_table . '
-			WHERE id = ' . $id;
+			WHERE id = ' . (int)$id;
 		$result = $db->sql_query_limit($sql, 1);
 		$order = $db->sql_fetchfield('order_question');
 		$db->sql_freeresult($result);
@@ -286,16 +289,16 @@ class main_module
 
 		if ($action == 'move_up')
 		{
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = '. $target['id'] . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = '. (int)$target['id'] . '';
 			$db->sql_query($sql);
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. $id . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. (int)$id . '';
 			$db->sql_query($sql);
 		}
 		else
 		{
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. $target['id'] . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = '. (int)$target['id'] . '';
 			$db->sql_query($sql);
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = '. $id . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = '. (int)$id . '';
 			$db->sql_query($sql);
 		}
 		return $order;
