@@ -44,9 +44,9 @@ class listener implements EventSubscriberInterface
 		);
 	}
 
-	/**
-	* Constructor
-	*/
+/**
+* Constructor
+*/
 	public function __construct(
 		\phpbb\config\config $config,
 		\phpbb\db\driver\driver_interface $db,
@@ -93,9 +93,9 @@ class listener implements EventSubscriberInterface
 			foreach($data as $key => $value)
 			{
 				$this->template->assign_block_vars('patternrow', array(
-					'L_KEY'		=> 'q_' . $data[$key]['key'] . '',
-					'L_VALUE'	=> $data[$key]['value'],
-					'L_EXPLAIN'	=> $data[$key]['explain'],
+					'KEY'		=> addslashes('q_' . $data[$key]['key'] . ''),
+					'VALUE'		=> addslashes($data[$key]['value']),
+					'EXPLAIN'	=> $data[$key]['explain'],
 					'ID'		=> $key,
 					)
 				);
