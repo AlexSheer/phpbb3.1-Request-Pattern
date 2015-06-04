@@ -1,7 +1,7 @@
 {
     "name": "sheer/ptrequest",
     "type": "phpbb-extension",
-    "description": "Description",
+    "description": "Adds a BBCode-like button to the reply form which triggers popup window containing some predefined text fields to be filled.",
     "homepage": "http://phpbbguru.net",
     "version": "1.0.2",
     "time": "2015-04-18",
