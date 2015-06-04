@@ -9,8 +9,8 @@
 	var optionsKeys = new Array({OPTIONS_NUMBER});
 
 <!-- BEGIN patternrow -->
-	optionsList[{patternrow.ID}] = '{patternrow.L_VALUE}';
-	optionsKeys[{patternrow.ID}] = '{patternrow.L_KEY}';
+	optionsList[{patternrow.ID}] = '{patternrow.VALUE}';
+	optionsKeys[{patternrow.ID}] = '{patternrow.KEY}';
 <!-- END patternrow -->
 
 	function toogle_pattern_box()
@@ -55,7 +55,7 @@ input.close:hover
 				<fieldset style="max-height: 400px; overflow-y: scroll;">
 				<!-- BEGIN patternrow -->
 					<dl>
-						<dt><label style="padding-bottom:0px;" for="{patternrow.ID}">{patternrow.L_VALUE}</label><!-- IF patternrow.L_EXPLAIN --><span>{patternrow.L_EXPLAIN}</span><!-- ENDIF --></dt>
+						<dt><label style="padding-bottom:0px;" for="{patternrow.ID}">{patternrow.VALUE}</label><!-- IF patternrow.EXPLAIN --><span>{patternrow.EXPLAIN}</span><!-- ENDIF --></dt>
 						<dd><input type="text" tabindex="{patternrow.ID}" name="{patternrow.L_KEY}" id="{patternrow.ID}" size="25" class="inputbox" /></dd>
 					</dl>
 				<!-- END patternrow -->
