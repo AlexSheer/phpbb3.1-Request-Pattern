@@ -1,0 +1,35 @@
+input.close
+{
+	color: #105289;
+	border: none;
+	background: none;
+	cursor: pointer;
+	text-align: center;
+}
+input.close:hover
+{
+	color: #D31141;
+	text-decoration: underline;
+}
+.request
+{
+	top: 5px;
+	width:800px;
+	max-height: 600px;
+	display:none
+}
+#patternrow
+{
+	max-height: 400px;
+	overflow-y: scroll;
+}
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {
+	#pattern_box{
+		width:260px;
+		max-height: 420px;
+	}
+	#patternrow
+	{
+		max-height: 300px;
+	}
+}
