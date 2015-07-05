@@ -1,4 +1,4 @@
-<!-- IF OPTIONS_NUMBER and ((S_VIEWTOPIC and S_QUICK_REPLY) or S_IN_POSTING) -->
+<!-- IF (S_VIEWTOPIC and S_QUICK_REPLY) or S_IN_POSTING -->
 <script type="text/javascript">
 // <![CDATA[
 	<!-- IF S_VIEWTOPIC and S_QUICK_REPLY -->var form_name = 'qr_postform';<!-- ELSE -->var form_name = 'postform';<!-- ENDIF -->
@@ -32,27 +32,13 @@
 	}
 // ]]>
 </script>
-<style>
-input.close
-{
-	color: #105289;
-	border: none;
-	background: none;
-	cursor: pointer;
-	text-align: center;
-}
-input.close:hover
-{
-	color: #D31141;
-	text-decoration: underline;
-}
-</style>
-<div id="pattern_box" class="phpbb_alert" style="top: 5px; width:800px; max-height: 600px; display:none">
+
+<div id="pattern_box" class="phpbb_alert request">
 	<form name=pattern>
 		<div class="panel" id="patternbox">
 			<div class="inner">
 				<h3>{L_PATTERN}</h3>
-				<fieldset style="max-height: 400px; overflow-y: scroll;">
+				<fieldset id="patternrow">
 				<!-- BEGIN patternrow -->
 					<dl>
 						<dt><label style="padding-bottom:0px;" for="{patternrow.ID}">{patternrow.VALUE}</label><!-- IF patternrow.EXPLAIN --><span>{patternrow.EXPLAIN}</span><!-- ENDIF --></dt>
