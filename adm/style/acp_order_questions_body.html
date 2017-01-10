@@ -10,19 +10,19 @@
 <form id="list" method="post" action="{U_ACTION}">
 	<!-- IF .patternrow -->
 	<fieldset class="tabulated">
-		<table class="table1 zebra-table">
+		<table class="table1 zebra-table fixed-width-table responsive">
 		<thead>
 			<tr>
-				<th>{L_QUESTION_NAME}</th>
+				<th style="width: 85%;">{L_QUESTION_NAME}</th>
 				<th>&nbsp;</th>
-				<th>{L_MARK}</th>
+				<th style="width: 60px;">{L_MARK}</th>
 			</tr>
 		</thead>
 		<tbody>
 		<!-- BEGIN patternrow -->
 			<tr>
-				<td><input name="patternrow[{patternrow.ID}]" type="text" size="144" value="{patternrow.QUESTION}">
-				<br />{L_EXPLAIN}{L_COLON} <input style="margin-top: 5px; width: 660px;" name="explain[{patternrow.ID}]" type="text" size="130" value="{patternrow.QUESTION_EXPLAIN}"></td>
+				<td><input name="patternrow[{patternrow.ID}]" style="width: 99%;" type="text" value="{patternrow.QUESTION}">
+				<br />{L_EXPLAIN}{L_COLON} <input style="margin-top: 5px; width: 91%;" name="explain[{patternrow.ID}]" type="text" value="{patternrow.QUESTION_EXPLAIN}"></td>
 				<td class="actions">
 					<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
 					<span class="up"><a href="{patternrow.U_MOVE_UP}" data-ajax="row_up">{ICON_MOVE_UP}</a></span>
