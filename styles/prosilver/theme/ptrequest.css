@@ -15,6 +15,7 @@ input.close:hover
 {
 	top: 5px;
 	width:800px;
+	padding: 10px;
 	max-height: 600px;
 	display:none
 }
