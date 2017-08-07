@@ -79,7 +79,7 @@ class listener implements EventSubscriberInterface
 					FROM ' . $this->request_table . '
 					ORDER BY order_question';
 				$result = $this->db->sql_query($sql);
-				while($row = $this->db->sql_fetchrow($result))
+				while ($row = $this->db->sql_fetchrow($result))
 				{
 					$id = $row['order_question'] - 1;
 					$data[$id]['key'] = $row['order_question'];
@@ -90,7 +90,7 @@ class listener implements EventSubscriberInterface
 				$this->cache->put('_pattern_request', $data);
 			}
 
-			foreach($data as $key => $value)
+			foreach ($data as $key => $value)
 			{
 				$this->template->assign_block_vars('patternrow', array(
 					'KEY'		=> addslashes('q_' . $data[$key]['key'] . ''),
