@@ -104,7 +104,7 @@ class main_module
 
 			if (sizeof($ids))
 			{
-				foreach($ids as $key => $id)
+				foreach ($ids as $key => $id)
 				{
 					if (!$order_questions[$id])
 					{
@@ -121,7 +121,7 @@ class main_module
 
 						$sql = 'UPDATE ' . $this->request_table . '
 							SET ' . $db->sql_build_array('UPDATE', $sql_data) . '
-							WHERE id =' . (int)$id;
+							WHERE id=' . (int)$id;
 						$db->sql_query($sql);
 					}
 				}
