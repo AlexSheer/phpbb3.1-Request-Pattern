@@ -45,7 +45,7 @@ class main_module
 		$forum_list		= make_forum_select(false, false, true, true, true, false, true);
 		$s_forum_options = '';
 
-		foreach ($forum_list as $key => $value)
+		foreach($forum_list as $key => $value)
 		{
 			$selected = (in_array($value['forum_id'], $forums)) ? true : false;
 			$s_forum_options .='<option value="' . $value['forum_id'] . '"' . (($selected) ? ' selected="selected"' : '') . (($value['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $value['padding'] . $value['forum_name'] . '</option>';
@@ -102,11 +102,11 @@ class main_module
 				trigger_error('FORM_INVALID');
 			}
 
-			if (sizeof($ids))
+			if(sizeof($ids))
 			{
-				foreach ($ids as $key => $id)
+				foreach($ids as $key => $id)
 				{
-					if (!$order_questions[$id])
+					if(!$order_questions[$id])
 					{
 						$error[] = $user->lang['EMPTY_QUESTION'];
 						break;
@@ -121,7 +121,7 @@ class main_module
 
 						$sql = 'UPDATE ' . $this->request_table . '
 							SET ' . $db->sql_build_array('UPDATE', $sql_data) . '
-							WHERE id = ' . (int) $id; 
+							WHERE id = ' . (int) $id;
 						$db->sql_query($sql);
 					}
 				}
@@ -143,16 +143,16 @@ class main_module
 				if ($deletemark && sizeof($ids))
 				{
 					$msg = $user->lang['DELETE_MARKED_SUCESS'];
-					foreach ($ids as $id)
+					foreach($ids as $id)
 					{
 						$sql = 'SELECT order_question
 							FROM ' . $this->request_table. '
-							WHERE id = '. (int) $id;
+							WHERE id = '. (int)$id;
 						$result = $db->sql_query($sql);
 						$order_question = (int) $db->sql_fetchfield('order_question');
 						$db->sql_freeresult($result);
 
-						$sql = 'DELETE FROM ' . $this->request_table. ' WHERE id ='. (int)$id;
+						$sql = 'DELETE FROM ' . $this->request_table. ' WHERE id = ' . (int) $id;
 						$db->sql_query($sql);
 
 						$sql = 'SELECT id, order_question
@@ -162,13 +162,13 @@ class main_module
 
 						while ($row = $db->sql_fetchrow($result))
 						{
-							$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id ='. (int)$row['id'] . '';
+							$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = ' . (int)$row['id'] . '';
 							$db->sql_query($sql);
 						}
 						$db->sql_freeresult($result);
 					}
 				}
-				if ($deleteall)
+				if($deleteall)
 				{
 					$sql = 'TRUNCATE ' . $this->request_table;
 					$msg = $user->lang['DELETE_SUCESS'];
@@ -215,12 +215,12 @@ class main_module
 			$db->sql_freeresult($result);
 			++$max;
 
-			if (!$question)
+			if(!$question)
 			{
 				$_error[] = $user->lang['EMPTY_QUESTION'];
 			}
 
-			if (!sizeof($_error))
+			if(!sizeof($_error))
 			{
 				$sql_ary = array(
 					'question'			=> $question,
@@ -266,7 +266,7 @@ class main_module
 		global $db, $phpbb_container;
 		$sql = 'SELECT order_question
 			FROM ' . $this->request_table . '
-			WHERE id =' . (int)$id;
+			WHERE id = ' . (int) $id;
 		$result = $db->sql_query_limit($sql, 1);
 		$order = $db->sql_fetchfield('order_question');
 		$db->sql_freeresult($result);
@@ -289,16 +289,16 @@ class main_module
 
 		if ($action == 'move_up')
 		{
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id ='. (int)$target['id'] . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = ' . (int) $target['id'] . '';
 			$db->sql_query($sql);
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id ='. (int)$id . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = ' . (int) $id . '';
 			$db->sql_query($sql);
 		}
 		else
 		{
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id ='. (int)$target['id'] . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = ' . (int) $target['id'] . '';
 			$db->sql_query($sql);
-			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = '. (int)$id . '';
+			$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question + 1 WHERE id = ' . (int) $id . '';
 			$db->sql_query($sql);
 		}
 		return $order;
