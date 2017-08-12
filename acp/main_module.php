@@ -45,7 +45,7 @@ class main_module
 		$forum_list		= make_forum_select(false, false, true, true, true, false, true);
 		$s_forum_options = '';
 
-		foreach($forum_list as $key => $value)
+		foreach ($forum_list as $key => $value)
 		{
 			$selected = (in_array($value['forum_id'], $forums)) ? true : false;
 			$s_forum_options .='<option value="' . $value['forum_id'] . '"' . (($selected) ? ' selected="selected"' : '') . (($value['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $value['padding'] . $value['forum_name'] . '</option>';
@@ -102,11 +102,11 @@ class main_module
 				trigger_error('FORM_INVALID');
 			}
 
-			if(sizeof($ids))
+			if (sizeof($ids))
 			{
-				foreach($ids as $key => $id)
+				foreach ($ids as $key => $id)
 				{
-					if(!$order_questions[$id])
+					if (!$order_questions[$id])
 					{
 						$error[] = $user->lang['EMPTY_QUESTION'];
 						break;
@@ -143,7 +143,7 @@ class main_module
 				if ($deletemark && sizeof($ids))
 				{
 					$msg = $user->lang['DELETE_MARKED_SUCESS'];
-					foreach($ids as $id)
+					foreach ($ids as $id)
 					{
 						$sql = 'SELECT order_question
 							FROM ' . $this->request_table. '
@@ -168,7 +168,7 @@ class main_module
 						$db->sql_freeresult($result);
 					}
 				}
-				if($deleteall)
+				if ($deleteall)
 				{
 					$sql = 'TRUNCATE ' . $this->request_table;
 					$msg = $user->lang['DELETE_SUCESS'];
@@ -215,12 +215,12 @@ class main_module
 			$db->sql_freeresult($result);
 			++$max;
 
-			if(!$question)
+			if (!$question)
 			{
 				$_error[] = $user->lang['EMPTY_QUESTION'];
 			}
 
-			if(!sizeof($_error))
+			if (!sizeof($_error))
 			{
 				$sql_ary = array(
 					'question'			=> $question,
