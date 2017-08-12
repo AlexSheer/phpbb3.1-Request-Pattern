@@ -121,7 +121,7 @@ class main_module
 
 						$sql = 'UPDATE ' . $this->request_table . '
 							SET ' . $db->sql_build_array('UPDATE', $sql_data) . '
-							WHERE id=' . (int)$id;
+							WHERE id = ' . (int) $id; 
 						$db->sql_query($sql);
 					}
 				}
@@ -147,7 +147,7 @@ class main_module
 					{
 						$sql = 'SELECT order_question
 							FROM ' . $this->request_table. '
-							WHERE id ='. (int)$id;
+							WHERE id = '. (int) $id;
 						$result = $db->sql_query($sql);
 						$order_question = (int) $db->sql_fetchfield('order_question');
 						$db->sql_freeresult($result);
