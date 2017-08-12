@@ -157,7 +157,7 @@ class main_module
 
 						$sql = 'SELECT id, order_question
 							FROM ' . $this->request_table . '
-							WHERE order_question > ' . $order_question;
+							WHERE order_question > ' . (int) $order_question;
 						$result = $db->sql_query($sql);
 
 						while ($row = $db->sql_fetchrow($result))
