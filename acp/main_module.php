@@ -146,8 +146,8 @@ class main_module
 					foreach ($ids as $id)
 					{
 						$sql = 'SELECT order_question
-							FROM ' . $this->request_table. '
-							WHERE id = '. (int)$id;
+							FROM ' . $this->request_table . '
+							WHERE id = '. (int) $id;
 						$result = $db->sql_query($sql);
 						$order_question = (int) $db->sql_fetchfield('order_question');
 						$db->sql_freeresult($result);
@@ -157,12 +157,12 @@ class main_module
 
 						$sql = 'SELECT id, order_question
 							FROM ' . $this->request_table . '
-							WHERE order_question > '. $order_question;
+							WHERE order_question > ' . $order_question;
 						$result = $db->sql_query($sql);
 
 						while ($row = $db->sql_fetchrow($result))
 						{
-							$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = ' . (int)$row['id'] . '';
+							$sql = 'UPDATE ' . $this->request_table . ' SET order_question = order_question - 1 WHERE id = ' . (int) $row['id'] . '';
 							$db->sql_query($sql);
 						}
 						$db->sql_freeresult($result);
