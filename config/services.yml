@@ -4,12 +4,12 @@ services:
     sheer.ptrequest.listener:
         class: sheer\ptrequest\event\listener
         arguments:
-            - @config
-            - @dbal.conn
-            - @template
-            - @controller.helper
-            - @cache
-            - %core.root_path%
-            - %tables.ptrequest%
+            - '@config'
+            - '@dbal.conn'
+            - '@template'
+            - '@controller.helper'
+            - '@cache'
+            - '%core.root_path%'
+            - '%tables.ptrequest%'
         tags:
             - { name: event.listener }
